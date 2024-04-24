@@ -25,11 +25,22 @@ const FileExplorerRoot = ({ explorerJSON }) => {
     }
   };
 
+  const editItem = (event, dynamicStack, details) => {
+    let dataCopy = [...data];
+    let temp = dataCopy;
+    temp = traverse(dynamicStack, temp);
+    if (temp) {
+      temp[dynamicStack[0]] = {...details}
+      setData(dataCopy);
+    }
+  }
+
   return (
     <FileExplorer
       data={data}
       addFile={insertItem}
       addFolder={insertItem}
+      editItem={editItem}
       deleteItem={deleteItem}
     />
   );
